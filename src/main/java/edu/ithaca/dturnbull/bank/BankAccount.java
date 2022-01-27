@@ -40,11 +40,46 @@ public class BankAccount {
 
 
     public static boolean isEmailValid(String email){
-        if (email.indexOf('@') == -1){
+       Boolean valid = true;
+
+        if (email == "") {
+            return false;
+        } 
+
+        //check prefix
+        String prefix = email.split("@")[0].toString();
+        if (prefix.endsWith("-")) {
             return false;
         }
-        else {
-            return true;
+
+        if (prefix.contains("#")) {
+            return false;
         }
+    
+        if (email.indexOf('@') == -1){
+            return false;
+        } 
+
+        //check domain
+        String domain = email.split("@")[1].toString();
+        if (domain.contains("#")) {
+            return false;
+        }
+
+        return valid;
+    }
+
+
+    public static void main(String[] args) {
+        String b = "abc-@mail.com";
+        String prefix = b.split("@")[0];
+        System.out.println(prefix);
+        Boolean validity = true;
+      //  if (prefix.contains("\\-")) {
+            if (prefix.indexOf("\\-") == -1) {
+                validity = false;
+            }
+        //}
+        System.out.println(validity);
     }
 }
